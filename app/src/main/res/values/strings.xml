@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TestAssigment</string>
+    <string name="sort_date">Sort by date</string>
+    <string name="sort_title">Sort by title</string>
+    <string name="add_button">Add</string>
+    <string name="cancel_dialog">Cancel</string>
+    <string name="dialog_title">Add Calendar Event</string>
+</resources>

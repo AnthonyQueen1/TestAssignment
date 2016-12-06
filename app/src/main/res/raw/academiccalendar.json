@@ -1,0 +1,92 @@
+[
+  {
+    "dtstart": "8/12/2015",
+    "dtend": "8/12/2015",
+    "summary": "Orientation"
+  },
+  {
+    "dtstart": "8/13/2015",
+    "dtend": "8/13/2015",
+    "summary": "Advisement"
+  },
+  {
+    "dtstart": "8/14/2015",
+    "dtend": "8/14/2015",
+    "summary": "Registration"
+  },
+  {
+    "dtstart": "8/17/2015",
+    "dtend": "8/17/2015",
+    "summary": "Classes Begin"
+  },
+  {
+    "dtstart": "8/17/2015",
+    "dtend": "8/21/2015",
+    "summary": "Drop/Add for undergraduate level courses (1000 - 5999) and graduate level courses (6000 - 9999)"
+  },
+  {
+    "dtstart": "9/7/2015",
+    "dtend": "9/7/2015",
+    "summary": "Holiday: Labor Day - No Classes"
+  },
+  {
+    "dtstart": "10/6/2015",
+    "dtend": "10/6/2015",
+    "summary": "Midterm"
+  },
+  {
+    "dtstart": "10/22/2015",
+    "dtend": "10/22/2015",
+    "summary": "Withdrawal Deadline"
+  },
+  {
+    "dtstart": "10/30/2015",
+    "dtend": "10/30/2015",
+    "summary": "Fall Break"
+  },
+  {
+    "dtstart": "11/20/2015",
+    "dtend": "11/20/2015",
+    "summary": "Last Day of Classes Prior to Thanksgiving Break"
+  },
+  {
+    "dtstart": "11/23/2015",
+    "dtend": "11/27/2015",
+    "summary": "Holidays: Thanksgiving"
+  },
+  {
+    "dtstart": "11/30/2015",
+    "dtend": "11/30/2015",
+    "summary": "Classes Resume"
+  },
+  {
+    "dtstart": "12/8/2015",
+    "dtend": "12/8/2015",
+    "summary": "Friday Class Schedule In Effect*"
+  },
+  {
+    "dtstart": "12/8/2015",
+    "dtend": "12/8/2015",
+    "summary": "Classes End"
+  },
+  {
+    "dtstart": "12/9/2015",
+    "dtend": "12/9/2015",
+    "summary": "Reading Day"
+  },
+  {
+    "dtstart": "12/10/2015",
+    "dtend": "12/16/2015",
+    "summary": "Final Exams"
+  },
+  {
+    "dtstart": "12/18/2015",
+    "dtend": "12/18/2015",
+    "summary": "Commencement"
+  },
+  {
+    "dtstart": "12/21/2015",
+    "dtend": "12/21/2015",
+    "summary": "Grades Due"
+  }
+]
