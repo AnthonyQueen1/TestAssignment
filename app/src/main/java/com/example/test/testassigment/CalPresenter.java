@@ -95,27 +95,34 @@ public class CalPresenter {
             try{
                 event.setDate1(date1);
             } catch (Exception e){
-                mCalendarFragment.displayDateReadingError();
+                mCalendarFragment.displayDateReadingError("Error: first date formatted incorrectly");
             }
         }
         if(!date2.isEmpty()){
             try{
                 event.setDate2(date2);
             } catch (Exception e){
-                mCalendarFragment.displayDateReadingError();
+                mCalendarFragment.displayDateReadingError("Error: second date is formatted incorrectly");
             }
         }
         loadCalendar(false);
     }
 
+    public void addNewEvent(){
+        mCalendarFragment.setUpDialogForAdd();
+    }
+
     public void addEvent(String title, String date1, String date2){
         CalEvent temp;
-        if(CalEvent.isValidInput(date1) && CalEvent.isValidInput(date2)) {
+        if(title.isEmpty()) {
+            mCalendarFragment.displayDateReadingError("Error: empty title");
+        }
+        else if(CalEvent.isValidInput(date1) && CalEvent.isValidInput(date2)) {
             temp = new CalEvent(title, date1, date2);
             mJsonHelp.addEvent(temp);
             loadCalendar(false);
         } else {
-            mCalendarFragment.displayDateReadingError();
+            mCalendarFragment.displayDateReadingError("Error: invalid date format");
         }
     }
 }

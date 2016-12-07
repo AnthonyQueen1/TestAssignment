@@ -19,11 +19,19 @@ android {
     }
 }
 
+ext {
+    supportLibVersion = '25.0.1'  // variable that can be referenced to keep support libs consistent
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile "com.android.support:appcompat-v7:${supportLibVersion}"
 
     // for guava and checkNotNull
     compile group: 'com.google.guava', name: 'guava', version: '19.0'
+    // for floating action button
+    compile "com.android.support:design:${supportLibVersion}"
 }
+
+

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -73,6 +74,16 @@ public class CalendarFragment extends Fragment  {
 
         setHasOptionsMenu(true);
 
+        // set up floating action button
+        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab_main_activity);
+        fab.setImageResource(R.drawable.ic_plus);
+        fab.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                mCalPresenter.addNewEvent();
+            }
+        });
+
         return root;
     }
 
@@ -103,8 +114,8 @@ public class CalendarFragment extends Fragment  {
     }
 
     // displays toast to show user that there was an error
-    public void displayDateReadingError(){
-        Toast toast = Toast.makeText(getContext(), "Error reading date", Toast.LENGTH_SHORT);
+    public void displayDateReadingError(String error){
+        Toast toast = Toast.makeText(getContext(), error, Toast.LENGTH_SHORT);
         toast.show();
     }
 
@@ -112,24 +123,7 @@ public class CalendarFragment extends Fragment  {
     CalendarAdapter.CalItemListener mCalItemListener = new CalendarAdapter.CalItemListener() {
         @Override
         public void onItemClick(final CalEvent item) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("Edit entry");
-            View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.add_dialog, (ViewGroup) getView(), false);
-            final EditText titleET = (EditText) viewInflated.findViewById(R.id.title_edit_text);
-            final EditText firstET = (EditText) viewInflated.findViewById(R.id.first_time_edit_text);
-            final EditText secondET = (EditText) viewInflated.findViewById(R.id.second_time_edit_text);
-            builder.setView(viewInflated)
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            mCalPresenter.editEvent(titleET.getText().toString(), firstET.getText().toString(), secondET.getText().toString(), item);
-                        }
-                    })
-                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // do nothing
-                        }
-                    })
-                    .show();
+            setUpDialog(item, 0);
         }
 
         @Override
@@ -137,6 +131,51 @@ public class CalendarFragment extends Fragment  {
             mCalPresenter.deleteEvent(calEvent);
         }
     };
+
+    public void setUpDialog(final CalEvent event, final int type){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Edit entry");
+        View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.add_dialog, (ViewGroup) getView(), false);
+        final EditText titleET = (EditText) viewInflated.findViewById(R.id.title_edit_text);
+        final EditText firstET = (EditText) viewInflated.findViewById(R.id.first_time_edit_text);
+        final EditText secondET = (EditText) viewInflated.findViewById(R.id.second_time_edit_text);
+        builder.setView(viewInflated)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 0 for edit
+                        if(type == 0) mCalPresenter.editEvent(titleET.getText().toString(), firstET.getText().toString(), secondET.getText().toString(), event);
+                        // 1 for add
+                        if(type == 1) mCalPresenter.addEvent(titleET.getText().toString(), firstET.getText().toString(), secondET.getText().toString());
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .show();
+    }
+
+    public void setUpDialogForAdd(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Add entry");
+        View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.add_dialog, (ViewGroup) getView(), false);
+        final EditText titleET = (EditText) viewInflated.findViewById(R.id.title_edit_text);
+        final EditText firstET = (EditText) viewInflated.findViewById(R.id.first_time_edit_text);
+        final EditText secondET = (EditText) viewInflated.findViewById(R.id.second_time_edit_text);
+        builder.setView(viewInflated)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        mCalPresenter.addEvent(titleET.getText().toString(), firstET.getText().toString(), secondET.getText().toString());
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .show();
+    }
 
 
 
@@ -203,6 +242,8 @@ public class CalendarFragment extends Fragment  {
                     return true;
                 }
             });
+
+
             return rowView;
         }
 
