@@ -24,6 +24,8 @@ public class JsonHelp {
         mContext = context;
     }
 
+    // gets a JSON string from the JSON file in resources.
+    // returns null if there is an error
     @Nullable
     private String loadJSONFromAsset() {
         String json;
@@ -42,6 +44,7 @@ public class JsonHelp {
         return json;
     }
 
+    // gets a list of CalEvents from the JSON string
     public void getListFromJson(){
         mList = new ArrayList<>();
         try{
@@ -59,6 +62,7 @@ public class JsonHelp {
         }
     }
 
+    // returns the List of Events
     public List<CalEvent> getList(){
         return mList;
     }

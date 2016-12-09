@@ -4,6 +4,7 @@ package com.example.test.testassigment;
  * Created by antho on 12/4/2016.
  */
 
+// different ways to sort the events
 public enum SortType {
     // sort by date first
     DATE_FIRST,

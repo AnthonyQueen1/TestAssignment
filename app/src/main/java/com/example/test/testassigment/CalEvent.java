@@ -30,6 +30,7 @@ public final class CalEvent {
 
     private Date mDate2;
 
+    // a calendar event item
     public CalEvent (@NonNull String title, String time1, String time2){
         mId = UUID.randomUUID().toString();
         mTitle = title;
@@ -40,6 +41,8 @@ public final class CalEvent {
         }
         try{
             mDate2 = indateformat.parse(time2);
+            //forces dates to be in sequential order. (no start date is after an end date
+            if(mDate1.compareTo(mDate2) > 0) mDate2 = mDate1;
         } catch (Exception e){
             mDate2 = null;
         }
@@ -49,6 +52,7 @@ public final class CalEvent {
         return mTitle;
     }
 
+    // returns a string of formatted dates
     public String getDates(){
         if(mDate1 == null || mDate2 == null) return "Error parsing dates";
 
@@ -56,12 +60,14 @@ public final class CalEvent {
         return outdateformat.format(mDate1) + " - " + outdateformat.format(mDate2);
     }
 
+    // returns a string of the day of week. of the form Wednesday, Tuesday etc.
     public String getDayOfWeek(){
         if(mDate1 == null || mDate2 == null) return "Error parsing dates";
         if(mDate1.compareTo(mDate2) == 0) return outday.format(mDate1);
         return outday.format(mDate1) + " - " + outday.format(mDate2);
     }
 
+    // returns true if the string input is a valid date.
     public static boolean isValidInput(String s){
         try {
             indateformat.parse(s);
@@ -79,6 +85,7 @@ public final class CalEvent {
         mDate2 = indateformat.parse(date);
     }
 
+    //comparaters for comparing based on TITLE or DATE
     public static class Comparators {
         public static Comparator<CalEvent> TITLE = new Comparator<CalEvent>() {
             @Override

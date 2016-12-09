@@ -156,6 +156,8 @@ public class CalendarFragment extends Fragment  {
                 .show();
     }
 
+    // TODO: modify to put in its own class
+    // TODO: change to open a datepicker rather than string
     public void setUpDialogForAdd(){
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Add entry");
@@ -178,7 +180,7 @@ public class CalendarFragment extends Fragment  {
     }
 
 
-
+    //custom adapter for listview
     private static class CalendarAdapter extends BaseAdapter {
         private List<CalEvent> mList;
         private CalItemListener mItemListener;
@@ -188,11 +190,13 @@ public class CalendarFragment extends Fragment  {
             mItemListener = itemListener;
         }
 
+        // update view with current list
         public void replaceData(List<CalEvent> list){
             setList(list);
             notifyDataSetChanged();
         }
 
+        // sets the inner list to the provided list.
         private void setList(List<CalEvent> list){
             mList = checkNotNull(list);
         }
@@ -213,6 +217,7 @@ public class CalendarFragment extends Fragment  {
             return i;
         }
 
+        // sets up each row view and its click/longclick listener
         @Override
         public View getView(int i, View view, ViewGroup viewGroup){
             View rowView = view;
@@ -229,12 +234,16 @@ public class CalendarFragment extends Fragment  {
             daysTV.setText(calEvent.getDates());
             TextView weekdayTV = (TextView) rowView.findViewById(R.id.day_of_week);
             weekdayTV.setText(calEvent.getDayOfWeek());
+
+            // click listener, opens a dialog to edit
             rowView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
                     mItemListener.onItemClick(calEvent);
                 }
             });
+
+            // long click listener, deletes an event
             rowView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
