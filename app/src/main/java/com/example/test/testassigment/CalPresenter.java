@@ -26,10 +26,12 @@ public class CalPresenter {
         mCalendarFragment.setPresenter(this);
     }
 
+    // initializes calendar by forcing an update.
     public void start(){
         loadCalendar(mFirstLoad);
     }
 
+    // loads, and sorts calendar then updates view.
     public void loadCalendar(boolean forceUpdate) {
         if(forceUpdate)
             mJsonHelp.getListFromJson();
@@ -57,14 +59,17 @@ public class CalPresenter {
         processCalendar(mList);
     }
 
+    // update view
     private void processCalendar(List<CalEvent> list){
         mCalendarFragment.showCalendar(list);
     }
 
+    // set the sorttype for the list
     public void setSortType(SortType requestType){
         mSortType = requestType;
     }
 
+    // switches sort type to reverse sort if you click the same button twice
     public void toggleSortType(String sortType){
         switch(sortType) {
             case "date":
@@ -88,6 +93,7 @@ public class CalPresenter {
         loadCalendar(false);
     }
 
+    // editing an event, with logic for bad parsing
     public void editEvent(String title, String date1, String date2, CalEvent event){
         if(!title.isEmpty())
             event.setTitle(title);
@@ -108,10 +114,12 @@ public class CalPresenter {
         loadCalendar(false);
     }
 
+    // calls view to set up dialog box
     public void addNewEvent(){
         mCalendarFragment.setUpDialogForAdd();
     }
 
+    // adds a event and parses input with error checking
     public void addEvent(String title, String date1, String date2){
         CalEvent temp;
         if(title.isEmpty()) {
