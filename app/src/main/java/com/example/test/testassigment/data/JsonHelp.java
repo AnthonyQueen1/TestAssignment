@@ -1,4 +1,4 @@
-package com.example.test.testassigment;
+package com.example.test.testassigment.data;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,6 +7,9 @@ import java.util.List;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+
+import com.example.test.testassigment.R;
+import com.example.test.testassigment.data.CalEvent;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

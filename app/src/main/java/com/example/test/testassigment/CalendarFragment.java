@@ -22,6 +22,9 @@ import android.view.Menu;
 import android.widget.Toast;
 
 
+import com.example.test.testassigment.data.CalEvent;
+import com.example.test.testassigment.utils.SortType;
+
 import java.util.ArrayList;
 import java.util.List;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -145,8 +148,6 @@ public class CalendarFragment extends Fragment  {
                     public void onClick(DialogInterface dialog, int which) {
                         // 0 for edit
                         if(type == 0) mCalPresenter.editEvent(titleET.getText().toString(), firstET.getText().toString(), secondET.getText().toString(), event);
-                        // 1 for add
-                        if(type == 1) mCalPresenter.addEvent(titleET.getText().toString(), firstET.getText().toString(), secondET.getText().toString());
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -247,10 +248,13 @@ public class CalendarFragment extends Fragment  {
                         return true;
                     }
                 });
-
-
             }
 
+            private void updateTexts(){
+                mDayOfWeekTV.setText(calEvent.getDayOfWeek());
+                mDateTV.setText(calEvent.getDates());
+                mTitleTV.setText(calEvent.getTitle());
+            }
         }
 
         @Override
@@ -263,36 +267,9 @@ public class CalendarFragment extends Fragment  {
         @Override
         public void onBindViewHolder(CalendarViewHolder holder, int position){
             holder.mListener = mItemListener;
-            CalEvent calEvent = getItem(position);
-            holder.mDayOfWeekTV.setText(calEvent.getDayOfWeek());
-            holder.mDateTV.setText(calEvent.getDates());
-            holder.mTitleTV.setText(calEvent.getTitle());
-
-
+            holder.calEvent = getItem(position);
+            holder.updateTexts();
         }
-        // sets up each row view and its click/longclick listener
-//        @Override
-//        public void onBindViewHolder(final ViewHolder holder, int position){
-//            View rowView = view;
-//            if(rowView == null){
-//                LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-//                rowView = inflater.inflate(R.layout.item, viewGroup, false);
-//            }
-//
-//            final CalEvent calEvent = getItem(i);
-//
-//            TextView titleTV = (TextView) rowView.findViewById(R.id.title);
-//            titleTV.setText(calEvent.getTitle());
-//            TextView daysTV = (TextView) rowView.findViewById(R.id.date_of_event);
-//            daysTV.setText(calEvent.getDates());
-//            TextView weekdayTV = (TextView) rowView.findViewById(R.id.day_of_week);
-//            weekdayTV.setText(calEvent.getDayOfWeek());
-//
-//
-//
-//
-//            return rowView;
-//        }
 
         public interface CalItemListener {
             void onItemClick(CalEvent item);

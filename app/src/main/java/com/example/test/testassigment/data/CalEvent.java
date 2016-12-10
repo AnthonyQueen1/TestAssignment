@@ -1,4 +1,4 @@
-package com.example.test.testassigment;
+package com.example.test.testassigment.data;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,9 +19,6 @@ public final class CalEvent {
     private static final SimpleDateFormat indateformat = new SimpleDateFormat("M/d/yyyy");
     private static final SimpleDateFormat outdateformat = new SimpleDateFormat("MMM d, yyyy");
     private static final SimpleDateFormat outday = new SimpleDateFormat("EEEE");
-
-    private final String[] months = {"Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Nov", "Dec"};
-    private final String[] days   = {"", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
     @NonNull
     private String mTitle;

@@ -1,4 +1,4 @@
-package com.example.test.testassigment;
+package com.example.test.testassigment.utils;
 
 /**
  * Created by antho on 12/4/2016.
